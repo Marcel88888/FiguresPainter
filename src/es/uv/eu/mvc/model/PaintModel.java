@@ -7,10 +7,13 @@ public class PaintModel {
     private Color defaultFigureOutlineColor = Color.BLACK;
     private Color defaultFigureBackgroundColor = Color.BLACK;
     private int defaultThickness = 50;
-    private Color currentFigureOutlinecolor = Color.BLACK;
-    private Color currentFigureBackgroundColor = Color.BLACK;
-    private int currentThickness = 50;
-
+    private Color currentFigureOutlinecolor;
+    private Color currentFigureBackgroundColor;
+    private int currentThickness;
+    
+    public PaintModel() {
+        setCurrentToDefault();
+    }
 
     public void setDefaultOutlineColor(Color defaultOutlineColor) {
         this.defaultFigureOutlineColor = defaultOutlineColor;
@@ -59,7 +62,10 @@ public class PaintModel {
     public int getCurrentThickness() {
         return currentThickness;
     }
-
     
-    
+    public final void setCurrentToDefault() {
+        currentThickness = defaultThickness;
+        currentFigureOutlinecolor = defaultFigureOutlineColor;
+        currentFigureBackgroundColor = defaultFigureBackgroundColor;
+    }
 }

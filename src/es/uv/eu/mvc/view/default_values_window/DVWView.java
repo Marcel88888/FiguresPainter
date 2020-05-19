@@ -29,7 +29,7 @@ public class DVWView extends JFrame {
         this.add(bottomPanel, BorderLayout.SOUTH);
         
         getRootPane().setBorder(BorderFactory.createMatteBorder(8, 8, 8, 8, this.getBackground()));
-        this.setVisible(true);
+        //this.setVisible(true);
     }
 
     public PaintModel getModel() {

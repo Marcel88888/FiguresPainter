@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 import javax.swing.border.Border;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
 
 public class DVWStatusPanel extends JPanel {
     
@@ -24,14 +25,17 @@ public class DVWStatusPanel extends JPanel {
     public DVWStatusPanel(DVWView defValWindView) {
     
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        this.setPreferredSize(new Dimension(600, 50));
-        this.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
+        Border titledEtchedBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 3), 
+                "Chosen values", TitledBorder.LEFT, TitledBorder.TOP);
+        Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 10, 5);
+        Border border = BorderFactory.createCompoundBorder(titledEtchedBorder, emptyBorder);
+        this.setBorder(border);
         this.defValWindView= defValWindView;
         this.defaultThicknessTextLabel = new JLabel("Thickness:");
         this.defaultThicknessValueLabel = new JLabel(String.valueOf(defValWindView.getModel().getDefaultThickness()), SwingConstants.RIGHT);
-        this.defaultOutlineColorTextLabel = new JLabel("Outline:");
+        this.defaultOutlineColorTextLabel = new JLabel("Outline color:");
         this.defaultOutlineColorLabel = new JLabel();
-        this.defaultBackgroundColorTextLabel = new JLabel("Background:");
+        this.defaultBackgroundColorTextLabel = new JLabel("Background color:");
         this.defaultBackgroundColorLabel = new JLabel();
         
         defaultThicknessValueLabel.setPreferredSize(new Dimension(30, 20));
@@ -40,9 +44,9 @@ public class DVWStatusPanel extends JPanel {
         defaultThicknessValueLabel.setMaximumSize(defaultThicknessValueLabel.getPreferredSize());
         
         Border etchedBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
-        Border emptyBorder = BorderFactory.createEmptyBorder(0, 0, 0, 1);
-        Border border = BorderFactory.createCompoundBorder(etchedBorder, emptyBorder);
-        defaultThicknessValueLabel.setBorder(border);
+        Border emptyBorder2 = BorderFactory.createEmptyBorder(0, 0, 0, 1);
+        Border border2 = BorderFactory.createCompoundBorder(etchedBorder, emptyBorder2);
+        defaultThicknessValueLabel.setBorder(border2);
         
         Dimension colorDimension = new Dimension(80, 25);
         defaultOutlineColorLabel.setPreferredSize(colorDimension);

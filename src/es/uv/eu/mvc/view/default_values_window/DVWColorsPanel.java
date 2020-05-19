@@ -8,14 +8,16 @@ import javax.swing.JPanel;
 
 public class DVWColorsPanel extends JPanel {
     
-    private Color[] colors = {Color.BLACK, Color.CYAN, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY,
-        Color.MAGENTA, Color.ORANGE, Color.PINK, Color.YELLOW, Color.WHITE, Color.RED, Color.BLUE, Color.GREEN};
-    private String[] colorsNames = {"Black", "Cyan", "Dark grey", "Grey", "Light grey", "Magenta", "Orange",
-    "Pink", "Yellow", "White", "Red", "Blue", "Green"};
+    private Color[] colors = {Color.BLACK, Color.DARK_GRAY, Color.GRAY, Color.LIGHT_GRAY, Color.RED, 
+        Color.ORANGE, Color.YELLOW, Color.WHITE, Color.CYAN, Color.BLUE, Color.MAGENTA, Color.PINK, 
+        new Color(0, 200, 0), Color.GREEN};
+    private String[] colorsNames = {"Black", "Dark grey", "Grey", "Light grey", "Red", "Orange", 
+        "Yellow", "White", "Cyan", "Blue", "Magenta", "Pink", "Dark green", "Green"};
     private DVWColorChooser defaultOutlineColorChooser;
     private DVWColorChooser defaultBackgroundColorChooser;
     
     public DVWColorsPanel() {
+        
         this.setLayout(new GridLayout(1, 2, 5, 5));
         this.defaultOutlineColorChooser= new DVWColorChooser("Outline", colors, colorsNames, "Outline:");
         this.defaultBackgroundColorChooser = new DVWColorChooser("Background", colors, colorsNames, "Background:");

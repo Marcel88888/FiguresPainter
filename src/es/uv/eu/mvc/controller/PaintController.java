@@ -22,7 +22,9 @@ public class PaintController {
         this.model = model;
         this.defValWindView = defValWindView;
         this.paintView = paintView;
-        defValWindView.addWindowListener(new PaintWindowListener());
+        PaintWindowListener paintWindowListener = new PaintWindowListener();
+        defValWindView.addWindowListener(paintWindowListener);
+        paintView.addWindowListener(paintWindowListener);
         defValWindView.setActionListener(new PaintActionListener());
         defValWindView.setChangeListener(new PaintChangeListener());
     }
