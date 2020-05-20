@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.ImageIcon;
@@ -66,6 +67,7 @@ public class ToolsPanel extends JPanel {
         triangleButton.setBackground(Color.WHITE);
         circleButton.setBackground(Color.WHITE);
         eraserButton.setBackground(Color.WHITE);
+        eraserButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
         
         Dimension buttonDimension = new Dimension(40, 32);
         
@@ -73,6 +75,11 @@ public class ToolsPanel extends JPanel {
         triangleButton.setPreferredSize(buttonDimension);
         circleButton.setPreferredSize(buttonDimension);
         eraserButton.setPreferredSize(buttonDimension);
+        
+        rectangleButton.setActionCommand("setDrawingRectanglesMode");
+        triangleButton.setActionCommand("setDrawingTrianglesMode");
+        circleButton.setActionCommand("setDrawingCirclesMode");
+        eraserButton.setActionCommand("setEraserMode");
         
         Dimension gap = new Dimension(5, 0);
         
@@ -84,5 +91,27 @@ public class ToolsPanel extends JPanel {
         this.add(Box.createRigidArea(gap));
         this.add(eraserButton);
         this.add(Box.createRigidArea(gap));
+    }
+    
+    public void displayButtonAsChosen(JButton chosenButton) {
+        chosenButton.setBackground(Color.LIGHT_GRAY);
+    }
+    
+    public void displayOtherButtonsAsUnchosen(JButton chosenButton) {
+        if (chosenButton != rectangleButton)
+            rectangleButton.setBackground(Color.WHITE);
+        if (chosenButton != triangleButton)
+            triangleButton.setBackground(Color.WHITE);
+        if (chosenButton != circleButton)
+            circleButton.setBackground(Color.WHITE);
+        if (chosenButton != eraserButton)
+            eraserButton.setBackground(Color.WHITE);
+    }
+    
+    public void setActionListener(ActionListener al) {
+        rectangleButton.addActionListener(al);
+        triangleButton.addActionListener(al);
+        circleButton.addActionListener(al);
+        eraserButton.addActionListener(al);
     }
 }

@@ -29,6 +29,7 @@ public class DVWColorChooser extends JPanel {
         for (int i=0; i<colors.length; i++) {
             JButton newButton = new JButton(colorsNames[i]);
             newButton.setBackground(colors[i]);
+            newButton.setActionCommand("changeDefault" + colorType + "Color");
             if (colors[i] == Color.BLACK || colors[i] == Color.DARK_GRAY || colors[i] == Color.BLUE)
                 newButton.setForeground(Color.WHITE);
             colorButtons.add(newButton);
@@ -43,7 +44,6 @@ public class DVWColorChooser extends JPanel {
     public void setActionListener (ActionListener al) {
         for (JButton colorButton: colorButtons) {
             colorButton.addActionListener(al);
-            colorButton.setActionCommand("changeDefault" + colorType + "Color");
         }
     }
 }

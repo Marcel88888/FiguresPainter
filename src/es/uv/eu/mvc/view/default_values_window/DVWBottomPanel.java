@@ -40,6 +40,7 @@ public class DVWBottomPanel extends JPanel {
         Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 5, 5);
         Border border = BorderFactory.createCompoundBorder(titledEtchedBorder, emptyBorder);
         defaultThicknessSlider.setBorder(border);
+        defaultThicknessSlider.setName("defaultThicknessSlider");
         
         confirmButton.setPreferredSize(new Dimension(0, 40));
         confirmButton.setMinimumSize(confirmButton.getPreferredSize());

@@ -26,7 +26,7 @@ public class DVWStatusPanel extends JPanel {
     
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         Border titledEtchedBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 3), 
-                "Chosen values", TitledBorder.LEFT, TitledBorder.TOP);
+                "Chosen default values", TitledBorder.LEFT, TitledBorder.TOP);
         Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 10, 5);
         Border border = BorderFactory.createCompoundBorder(titledEtchedBorder, emptyBorder);
         this.setBorder(border);

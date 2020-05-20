@@ -30,6 +30,7 @@ public class ColorChooser extends JPanel {
         for (int i=0; i<colors.length; i++) {
             JButton newButton = new JButton();
             newButton.setBackground(colors[i]);
+            newButton.setActionCommand("changeCurrent" + colorType + "Color");
             colorButtons.add(newButton);
             this.add(newButton);
         }
@@ -42,7 +43,6 @@ public class ColorChooser extends JPanel {
     public void setActionListener (ActionListener al) {
         for (JButton colorButton: colorButtons) {
             colorButton.addActionListener(al);
-            colorButton.setActionCommand("changeCurrent" + colorType + "Color");
         }
     }
     

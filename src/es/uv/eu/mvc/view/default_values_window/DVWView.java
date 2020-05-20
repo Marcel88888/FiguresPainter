@@ -18,6 +18,7 @@ public class DVWView extends JFrame {
     public DVWView(PaintModel model) {
         
         super("Default values window");
+        this.setName("defaultValuesWindow");
         this.setLayout(new BorderLayout(17, 8));
         this.setSize(600, 520);
         
@@ -29,7 +30,10 @@ public class DVWView extends JFrame {
         this.add(bottomPanel, BorderLayout.SOUTH);
         
         getRootPane().setBorder(BorderFactory.createMatteBorder(8, 8, 8, 8, this.getBackground()));
-        //this.setVisible(true);
+        this.setAlwaysOnTop(true);
+        this.pack();
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
     }
 
     public PaintModel getModel() {
@@ -40,7 +44,7 @@ public class DVWView extends JFrame {
         return colorsPanel.getDefaultOutlineColorByButton(button);
     }
     
-    public Color getDefualtBackgroundColorByButton(JButton button) {
+    public Color getDefaultBackgroundColorByButton(JButton button) {
         return colorsPanel.getDefaultBackgroundColorByButton(button);
     }
     
