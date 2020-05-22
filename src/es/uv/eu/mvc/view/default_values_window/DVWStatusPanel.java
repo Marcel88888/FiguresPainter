@@ -26,7 +26,7 @@ public class DVWStatusPanel extends JPanel {
     
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         Border titledEtchedBorder = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK, 3), 
-                "Chosen default values", TitledBorder.LEFT, TitledBorder.TOP);
+                "Selected default values", TitledBorder.LEFT, TitledBorder.TOP);
         Border emptyBorder = BorderFactory.createEmptyBorder(5, 5, 10, 5);
         Border border = BorderFactory.createCompoundBorder(titledEtchedBorder, emptyBorder);
         this.setBorder(border);
@@ -63,21 +63,19 @@ public class DVWStatusPanel extends JPanel {
         defaultBackgroundColorLabel.setOpaque(true);
         defaultBackgroundColorLabel.setBackground(defValWindView.getModel().getDefaultBackgroundColor());
         
-        Dimension smallGap = new Dimension(5, 0);
+        Dimension gap = new Dimension(2, 0);
         
-        this.add(Box.createRigidArea(new Dimension(10, 0)));
         this.add(defaultThicknessTextLabel);
-        this.add(Box.createRigidArea(smallGap));
+        this.add(Box.createRigidArea(gap));
         this.add(defaultThicknessValueLabel);
         this.add(Box.createHorizontalGlue());
         this.add(defaultOutlineColorTextLabel);
-        this.add(Box.createRigidArea(smallGap));
+        this.add(Box.createRigidArea(gap));
         this.add(defaultOutlineColorLabel);
         this.add(Box.createHorizontalGlue());
         this.add(defaultBackgroundColorTextLabel);
-        this.add(Box.createRigidArea(smallGap));
+        this.add(Box.createRigidArea(gap));
         this.add(defaultBackgroundColorLabel);
-        this.add(Box.createHorizontalGlue());
     }
     
     public void updateDefaultThicknessValueLabel(int newThickness) {

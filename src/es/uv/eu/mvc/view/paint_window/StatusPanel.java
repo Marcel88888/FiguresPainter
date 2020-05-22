@@ -28,7 +28,7 @@ public class StatusPanel extends JPanel {
     
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         Border titledEmptyBorder = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), 
-                "Chosen current values", TitledBorder.LEFT, TitledBorder.TOP);
+                "Selected current values", TitledBorder.LEFT, TitledBorder.TOP);
         Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
         Border border = BorderFactory.createCompoundBorder(titledEmptyBorder, emptyBorder);
         this.setBorder(border);
@@ -40,7 +40,7 @@ public class StatusPanel extends JPanel {
         this.currentBackgroundColorTextLabel = new JLabel("Background color");
         this.currentBackgroundColorLabel = new JLabel();
         this.drawnFiguresCounterTextLabel = new JLabel("Nº drawn figures");
-        this.drawnFiguresCounterValueLabel = new JLabel(String.valueOf(paintView.getModel().getDrawnFigures()), SwingConstants.RIGHT);
+        this.drawnFiguresCounterValueLabel = new JLabel(String.valueOf(paintView.getModel().getDrawnFiguresNumber()), SwingConstants.RIGHT);
         
         currentThicknessValueLabel.setPreferredSize(new Dimension(30, 20));
         currentThicknessValueLabel.setMinimumSize(currentThicknessValueLabel.getPreferredSize());
@@ -102,5 +102,9 @@ public class StatusPanel extends JPanel {
     
     public void updateCurrentBackgroundColorLabel(Color newCurrentBackgroundColor) {
         currentBackgroundColorLabel.setBackground(newCurrentBackgroundColor);
+    }
+    
+    public void updateDrawnFiguresCounterValueLabel(int newDrawnFiguresNumber) {
+        drawnFiguresCounterValueLabel.setText(String.valueOf(newDrawnFiguresNumber));
     }
 }

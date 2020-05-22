@@ -10,7 +10,8 @@ public class PaintMenuBar extends JMenuBar {
     private JMenu file;
     private JMenuItem exit;
     private JMenu settings;
-    private JMenuItem defaultValues;
+    private JMenuItem changeDefaultValues;
+    private JMenuItem setForDefaultValues;
     
     public PaintMenuBar() {
         
@@ -18,13 +19,17 @@ public class PaintMenuBar extends JMenuBar {
         this.exit = new JMenuItem("Exit");
         
         this.settings = new JMenu("Settings");
-        this.defaultValues = new JMenuItem("Set current values to default");
+        
+        this.changeDefaultValues = new JMenuItem("Change default values");
+        this.setForDefaultValues = new JMenuItem("Set current values to default");
         
         exit.setActionCommand("exit");
-        defaultValues.setActionCommand("setCurrentValuesToDefault");
+        changeDefaultValues.setActionCommand("changeDefaultValues");
+        setForDefaultValues.setActionCommand("setCurrentValuesToDefault");
         
         file.add(exit);
-        settings.add(defaultValues);
+        settings.add(changeDefaultValues);
+        settings.add(setForDefaultValues);
         
         this.add(file);
         this.add(settings);
@@ -32,6 +37,7 @@ public class PaintMenuBar extends JMenuBar {
     
     public void setActionListener(ActionListener al) {
         exit.addActionListener(al);
-        defaultValues.addActionListener(al);
+        changeDefaultValues.addActionListener(al);
+        setForDefaultValues.addActionListener(al);
     }  
 }

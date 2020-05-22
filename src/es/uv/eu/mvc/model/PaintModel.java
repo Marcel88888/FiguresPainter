@@ -6,12 +6,13 @@ public class PaintModel {
     
     private Color defaultFigureOutlineColor = Color.BLACK;
     private Color defaultFigureBackgroundColor = Color.BLACK;
-    private int defaultThickness = 50;
+    private int defaultThickness = 10;
     private Color currentFigureOutlinecolor;
     private Color currentFigureBackgroundColor;
     private int currentThickness;
-    private int drawnFigures = 0;
+    private int drawnFiguresNumber = 0;
     private DrawingMode drawingMode = null;
+    private Color backgroundColor = Color.WHITE;
     
     public static enum DrawingMode {
         DRAWING_RECTANGLES,
@@ -76,16 +77,20 @@ public class PaintModel {
         return currentThickness;
     }
 
-    public int getDrawnFigures() {
-        return drawnFigures;
+    public int getDrawnFiguresNumber() {
+        return drawnFiguresNumber;
     }
 
     public DrawingMode getDrawingMode() {
         return drawingMode;
     }
 
+    public Color getBackgroundColor() {
+        return backgroundColor;
+    }
+
     public void incrementDrawnFigures() {
-        drawnFigures++;
+        drawnFiguresNumber++;
     }
     
     public final void setCurrentToDefault() {
