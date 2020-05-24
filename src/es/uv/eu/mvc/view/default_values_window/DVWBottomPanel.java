@@ -27,7 +27,7 @@ public class DVWBottomPanel extends JPanel {
         this.defValWindView = defValWindView;
         this.defaultThicknessSlider = new JSlider(0, 100);
         this.statusPanel = new DVWStatusPanel(defValWindView);
-        this.confirmButton = new JButton("OK");
+        this.confirmButton = new JButton("Confirm changes");
         
         defaultThicknessSlider.setMajorTickSpacing(10);
         defaultThicknessSlider.setMinorTickSpacing(1);

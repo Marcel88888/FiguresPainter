@@ -3,21 +3,24 @@ package es.uv.eu.mvc.controller;
 import es.uv.eu.mvc.model.PaintModel;
 import es.uv.eu.mvc.view.default_values_window.DVWView;
 import es.uv.eu.mvc.view.paint_window.PaintView;
+import es.uv.eu.mvc.view.paint_window.SaveImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JSlider;
+import javax.swing.SwingUtilities;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-// TODO ZMIENIC ZEBY CVW NIE BYL ZAWSZE NAJWYZEJ
-// TODO PO ZMIANIE CURRENT NA DFAULT UCINALO RYSUNEK
 
 public class PaintController {
     
@@ -44,6 +47,7 @@ public class PaintController {
         paintView.setActionListener(paintActionListener);
         paintView.setChangeListener(paintChangeListener);
         paintView.setMouseListener(new PainterMouseListener());
+        paintView.setMouseMotionListener(new PaintMouseMotionListener());
     }
     
     private class PaintActionListener implements ActionListener {
@@ -76,26 +80,25 @@ public class PaintController {
                         paintView.displayOtherToolsPanelButtonsAsUnchosen(button);
                         break;
                     case "changeCurrentOutlineColor":
-                        model.setCurrentOutlineColor(paintView.getCurrentOutlineColorByButton(button));
-                        paintView.updateCurrentOutlineColorLabel(model.getCurrentOutlineColor());
+                        model.setCurrentFigureOutlineColor(paintView.getCurrentOutlineColorByButton(button));
+                        paintView.updateCurrentOutlineColorLabel(model.getCurrentFigureOutlineColor());
                         break;
                     case "changeCurrentBackgroundColor":
-                        model.setCurrentBackgroundColor(paintView.getCurrentBackgroundColorByButton(button));
-                        paintView.updateCurrentBackgroundColorLabel(model.getCurrentBackgroundColor());
+                        model.setCurrentFigureBackgroundColor(paintView.getCurrentBackgroundColorByButton(button));
+                        paintView.updateCurrentBackgroundColorLabel(model.getCurrentFigureBackgroundColor());
                         break;
                     case "changeDefaultOutlineColor":
-                        model.setDefaultOutlineColor(defValWindView.getDefaultOutlineColorByButton(button));
-                        defValWindView.updateDefaultOutlineColorLabel(model.getDefaultOutlineColor());
+                        model.setUnconfirmedDefaultFigureOutlineColor(defValWindView.getDefaultOutlineColorByButton(button));
+                        defValWindView.updateDefaultOutlineColorLabel(model.getUnconfirmedDefaultFigureOutlineColor());
                         break;
                     case "changeDefaultBackgroundColor":
-                        model.setDefaultBackgroundColor(defValWindView.getDefaultBackgroundColorByButton(button));
-                        defValWindView.updateDefaultBackgroundColorLabel(model.getDefaultBackgroundColor());
+                        model.setUnconfirmedDefaultFigureBackgroundColor(defValWindView.getDefaultBackgroundColorByButton(button));
+                        defValWindView.updateDefaultBackgroundColorLabel(model.getUnconfirmedDefaultFigureBackgroundColor());
                         break;
                     case "confirmDefaultValues":
+                        model.confirmDefaultValues();
+                        model.clearUnconfirmedValues();
                         defValWindView.dispatchEvent(new WindowEvent(defValWindView, WindowEvent.WINDOW_CLOSING));
-                        model.setCurrentToDefault();
-                        //paintView.updateChosenValuesAfterDefaultValuesChange(model.getCurrentThickness(),
-                                //model.getCurrentOutlineColor(), model.getCurrentBackgroundColor());
                         paintView.setEnabled(true);
                         break;
                     default:
@@ -107,18 +110,32 @@ public class PaintController {
             else {
                 switch(command) {
                     case "changeDefaultValues":
-                        defValWindView = new DVWView(model);        
+                        defValWindView = new DVWView(model, paintView);        
                         defValWindView.addWindowListener(new PaintWindowListener());
                         defValWindView.setActionListener(new PaintActionListener());
                         defValWindView.setChangeListener(new PaintChangeListener());
+                        paintView.setEnabled(false);
                         break;
                     case "setCurrentValuesToDefault":
                         model.setCurrentToDefault();
                         paintView.updateChosenValuesToDefault(model.getCurrentThickness(),
-                                model.getCurrentOutlineColor(), model.getCurrentBackgroundColor());
+                                model.getCurrentFigureOutlineColor(), model.getCurrentFigureBackgroundColor());
+                        break;
+                    case "saveImage":
+                        SaveImage imageSaver = new SaveImage();
+                        model.saveImage(imageSaver.getFile());
                         break;
                     case "exit":
                         System.exit(0);
+                        break;
+                    case "showAuthors":
+                        JOptionPane.showMessageDialog(paintView, "Authors: Marcel Kawski", "Authors", 
+                                JOptionPane.PLAIN_MESSAGE);
+                        break;
+                    case "exitDVW":
+                        model.clearUnconfirmedValues();
+                        defValWindView.dispatchEvent(new WindowEvent(defValWindView, WindowEvent.WINDOW_CLOSING));
+                        paintView.setEnabled(true);
                         break;
                     default:
                         System.out.println("Controller: Command " + command + 
@@ -141,8 +158,8 @@ public class PaintController {
                     paintView.updateCurrentThicknessValueLabel(model.getCurrentThickness());
                     break;
                 case "defaultThicknessSlider":
-                    model.setDefaultThickness(newThickness);
-                    defValWindView.updateDefaultThicknessValueLabel(model.getDefaultThickness());
+                    model.setUnconfirmedDefaultThickness(newThickness);
+                    defValWindView.updateDefaultThicknessValueLabel(model.getUnconfirmedDefaultThickness());
                     break;
                 default:
                     System.out.println("Controller: There is no " + sliderName + 
@@ -190,9 +207,10 @@ public class PaintController {
                             int mouseX = me.getX();
                             int mouseY = me.getY();
                             if(mouseX != rectangleStartingX && mouseY != rectangleStartingY) {
-                                paintView.drawRectangle(rectangleStartingX, rectangleStartingY, mouseX, mouseY, 
-                                    model.getCurrentOutlineColor(), model.getCurrentBackgroundColor(), 
+                                model.drawRectangle(rectangleStartingX, rectangleStartingY, mouseX, mouseY, 
+                                    model.getCurrentFigureOutlineColor(), model.getCurrentFigureBackgroundColor(), 
                                     model.getCurrentThickness());
+                                paintView.getPaintingPanel().repaint();
                                 model.incrementDrawnFigures();
                                 paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
                             }
@@ -204,8 +222,9 @@ public class PaintController {
                             double r = Math.sqrt( Math.pow(me.getX()-circleStartingX, 2) + Math.pow(me.getY()-circleStartingY, 2) );
                             int radius = (int)Math.round(r);
                             if (r > currentThickness) {
-                                paintView.drawCircle(circleStartingX, circleStartingY, radius, model.getCurrentOutlineColor(), 
-                                        model.getCurrentBackgroundColor(), model.getCurrentThickness());
+                                model.drawCircle(circleStartingX, circleStartingY, radius, model.getCurrentFigureOutlineColor(), 
+                                        model.getCurrentFigureBackgroundColor(), model.getCurrentThickness());
+                                paintView.getPaintingPanel().repaint();
                                 model.incrementDrawnFigures();
                                 paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
                             }
@@ -232,9 +251,10 @@ public class PaintController {
                     int y2 = triangleYpoints.get(2);
                     // the triangle cannot have two or three points which are the same
                     if ( !(x0 == x1 && y0 == y1) && !(x1 == x2 && y1 == y2) && !(x0 == x2 && y0 == y2) ) {
-                        paintView.drawTriangle(x0, y0, x1, y1, x2, y2, 
-                                model.getCurrentOutlineColor(), model.getCurrentBackgroundColor(), 
+                        model.drawTriangle(x0, y0, x1, y1, x2, y2, 
+                                model.getCurrentFigureOutlineColor(), model.getCurrentFigureBackgroundColor(), 
                                 model.getCurrentThickness());
+                        paintView.getPaintingPanel().repaint();
                         model.incrementDrawnFigures();
                         paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
                     }
@@ -243,23 +263,58 @@ public class PaintController {
                 }
             }
             else if(me.getButton() == MouseEvent.BUTTON3) {
-                // deleting all drawn figures
+                int confirm = JOptionPane.showConfirmDialog(paintView, "Do you want to delete all the drawn figures?", "Select the option", 
+                    JOptionPane.YES_NO_OPTION);
+                if(confirm == 0) {
+                    model.clearImage();
+                    paintView.getPaintingPanel().repaint();
+                    paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
+                }
             }
         }
+    }
+    
+    private class PaintMouseMotionListener extends MouseMotionAdapter {
+        
+        private PaintModel.DrawingMode mode;
+        
+        @Override
+        public void mouseDragged(MouseEvent me) {
+            mode = model.getDrawingMode();
+            if(mode == PaintModel.DrawingMode.ERASER && SwingUtilities.isLeftMouseButton(me)) { 
+                model.erase(me.getX(), me.getY(), model.getEraserSize()/2, model.getBackgroundColor());
+                paintView.getPaintingPanel().repaint();
+            }
+        } 
     }
     
     private class PaintWindowListener extends WindowAdapter {
         @Override
         public void windowClosing(WindowEvent e) {
-            JFrame closedWindow = (JFrame)e.getSource();
-            String windowName= closedWindow.getName();
-            switch(windowName) {
-                case "paintWindow":
-                    System.exit(0);
-                    break;
-                case "defaultValuesWindow":
-                    closedWindow.dispose();
-                    break;   
+            JFrame closedJFrame;
+            JDialog closedJDialog = null;
+            String closedWindowName = null;
+            if (e.getSource() instanceof JFrame) {
+                closedJFrame = (JFrame)e.getSource();
+                closedWindowName = closedJFrame.getName();
+            }
+            else if (e.getSource() instanceof JDialog) {
+                closedJDialog = (JDialog)e.getSource();
+                closedWindowName = closedJDialog.getName();
+            }
+            if(closedWindowName != null) {
+                switch(closedWindowName) {
+                    case "paintWindow":
+                        System.exit(0);
+                        break;
+                    case "defaultValuesWindow":
+                        if(closedJDialog != null) {
+                            model.clearUnconfirmedValues();
+                            closedJDialog.dispose();
+                            paintView.setEnabled(true);
+                        }
+                        break;   
+                }
             }
         }
     }  

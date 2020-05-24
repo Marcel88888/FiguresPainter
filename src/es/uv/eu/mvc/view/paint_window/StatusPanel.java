@@ -61,14 +61,14 @@ public class StatusPanel extends JPanel {
         currentOutlineColorLabel.setMinimumSize(currentOutlineColorLabel.getPreferredSize());
         currentOutlineColorLabel.setMaximumSize(currentOutlineColorLabel.getPreferredSize());
         currentOutlineColorLabel.setOpaque(true);
-        currentOutlineColorLabel.setBackground(paintView.getModel().getCurrentOutlineColor());
+        currentOutlineColorLabel.setBackground(paintView.getModel().getCurrentFigureOutlineColor());
         
         currentBackgroundColorLabel.setPreferredSize(colorDimension);
         currentBackgroundColorLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         currentBackgroundColorLabel.setMinimumSize(currentBackgroundColorLabel.getPreferredSize());
         currentBackgroundColorLabel.setMaximumSize(currentBackgroundColorLabel.getPreferredSize());
         currentBackgroundColorLabel.setOpaque(true);
-        currentBackgroundColorLabel.setBackground(paintView.getModel().getCurrentBackgroundColor());
+        currentBackgroundColorLabel.setBackground(paintView.getModel().getCurrentFigureBackgroundColor());
         
         Dimension smallGap = new Dimension(10, 0);
         Dimension bigGap = new Dimension(200, 0);

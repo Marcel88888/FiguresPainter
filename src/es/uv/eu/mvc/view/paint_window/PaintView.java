@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
+import java.awt.event.MouseMotionAdapter;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.event.ChangeListener;
@@ -44,6 +45,10 @@ public class PaintView extends JFrame {
     public PaintModel getModel() {
         return model;
     }
+
+    public PaintingPanel getPaintingPanel() {
+        return paintingPanel;
+    }
     
     public Color getCurrentOutlineColorByButton(JButton button) {
         return settingsPanel.getCurrentOutlineColorByButton(button);
@@ -51,19 +56,6 @@ public class PaintView extends JFrame {
     
     public Color getCurrentBackgroundColorByButton(JButton button) {
         return settingsPanel.getCurrentBackgroundColorByButton(button);
-    }
-    
-    public void drawRectangle(int x1, int y1, int x2, int y2, Color outlineColor, Color backgroundColor, int thickness) {
-        paintingPanel.drawRectangle(x1, y1, x2, y2, outlineColor, backgroundColor, thickness);
-    }
-    
-    public void drawTriangle(int x1, int y1, int x2, int y2, int x3, int y3, Color outlineColor, Color backgroundColor, 
-            int thickness) {
-        paintingPanel.drawTriangle(x1, y1, x2, y2, x3, y3, outlineColor, backgroundColor, thickness);
-    }
-    
-    public void drawCircle(int x, int y, int r, Color outlineColor, Color backgroundColor, int thickness) {
-        paintingPanel.drawCircle(x, y, r, outlineColor, backgroundColor, thickness);
     }
     
     public void updateCurrentThicknessValueLabel(int newThickness) {
@@ -109,5 +101,9 @@ public class PaintView extends JFrame {
     
     public void setMouseListener(MouseAdapter ma) {
         paintingPanel.addMouseListener(ma);
+    }
+    
+    public void setMouseMotionListener(MouseMotionAdapter mma) {
+        paintingPanel.addMouseMotionListener(mma);
     }
 }

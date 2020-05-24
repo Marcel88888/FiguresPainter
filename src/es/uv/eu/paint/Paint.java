@@ -9,8 +9,8 @@ public class Paint {
 
     public static void main(String[] args) {
         PaintModel model = new PaintModel();
-        DVWView defValWindView = new DVWView(model);
         PaintView paintView = new PaintView(model);
+        DVWView defValWindView = new DVWView(model, paintView);
         new PaintController(model, defValWindView, paintView);
     }
     

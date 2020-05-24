@@ -54,14 +54,14 @@ public class DVWStatusPanel extends JPanel {
         defaultOutlineColorLabel.setMinimumSize(defaultOutlineColorLabel.getPreferredSize());
         defaultOutlineColorLabel.setMaximumSize(defaultOutlineColorLabel.getPreferredSize());
         defaultOutlineColorLabel.setOpaque(true);
-        defaultOutlineColorLabel.setBackground(defValWindView.getModel().getDefaultOutlineColor());
+        defaultOutlineColorLabel.setBackground(defValWindView.getModel().getDefaultFigureOutlineColor());
         
         defaultBackgroundColorLabel.setPreferredSize(colorDimension);
         defaultBackgroundColorLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         defaultBackgroundColorLabel.setMinimumSize(defaultBackgroundColorLabel.getPreferredSize());
         defaultBackgroundColorLabel.setMaximumSize(defaultBackgroundColorLabel.getPreferredSize());
         defaultBackgroundColorLabel.setOpaque(true);
-        defaultBackgroundColorLabel.setBackground(defValWindView.getModel().getDefaultBackgroundColor());
+        defaultBackgroundColorLabel.setBackground(defValWindView.getModel().getDefaultFigureBackgroundColor());
         
         Dimension gap = new Dimension(2, 0);
         

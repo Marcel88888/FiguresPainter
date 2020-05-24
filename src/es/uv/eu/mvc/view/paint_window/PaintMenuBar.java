@@ -8,6 +8,8 @@ import javax.swing.JMenuItem;
 public class PaintMenuBar extends JMenuBar {
     
     private JMenu file;
+    private JMenuItem save;
+    private JMenuItem authors;
     private JMenuItem exit;
     private JMenu settings;
     private JMenuItem changeDefaultValues;
@@ -16,17 +18,22 @@ public class PaintMenuBar extends JMenuBar {
     public PaintMenuBar() {
         
         this.file = new JMenu("File");
+        this.save = new JMenuItem("Save as");
+        this.authors = new JMenuItem("Authors");
         this.exit = new JMenuItem("Exit");
         
         this.settings = new JMenu("Settings");
-        
         this.changeDefaultValues = new JMenuItem("Change default values");
         this.setForDefaultValues = new JMenuItem("Set current values to default");
         
+        save.setActionCommand("saveImage");
+        authors.setActionCommand("showAuthors");
         exit.setActionCommand("exit");
         changeDefaultValues.setActionCommand("changeDefaultValues");
         setForDefaultValues.setActionCommand("setCurrentValuesToDefault");
         
+        file.add(save);
+        file.add(authors);
         file.add(exit);
         settings.add(changeDefaultValues);
         settings.add(setForDefaultValues);
@@ -36,6 +43,8 @@ public class PaintMenuBar extends JMenuBar {
     }
     
     public void setActionListener(ActionListener al) {
+        save.addActionListener(al);
+        authors.addActionListener(al);
         exit.addActionListener(al);
         changeDefaultValues.addActionListener(al);
         setForDefaultValues.addActionListener(al);
