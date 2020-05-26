@@ -159,7 +159,7 @@ public class PaintModel {
         unconfirmedDefaultThickness = defaultThickness;
     }
 
-    public void incrementDrawnFigures() {
+    public void incrementDrawnFiguresNumber() {
         drawnFiguresNumber++;
     }
     

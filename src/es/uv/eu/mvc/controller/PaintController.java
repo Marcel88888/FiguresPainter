@@ -123,7 +123,7 @@ public class PaintController {
                         break;
                     case "saveImage":
                         SaveImage imageSaver = new SaveImage();
-                        model.saveImage(imageSaver.getFile());
+                        model.saveImage(imageSaver.getFile(paintView));
                         break;
                     case "exit":
                         System.exit(0);
@@ -211,7 +211,7 @@ public class PaintController {
                                     model.getCurrentFigureOutlineColor(), model.getCurrentFigureBackgroundColor(), 
                                     model.getCurrentThickness());
                                 paintView.getPaintingPanel().repaint();
-                                model.incrementDrawnFigures();
+                                model.incrementDrawnFiguresNumber();
                                 paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
                             }
                         }
@@ -225,7 +225,7 @@ public class PaintController {
                                 model.drawCircle(circleStartingX, circleStartingY, radius, model.getCurrentFigureOutlineColor(), 
                                         model.getCurrentFigureBackgroundColor(), model.getCurrentThickness());
                                 paintView.getPaintingPanel().repaint();
-                                model.incrementDrawnFigures();
+                                model.incrementDrawnFiguresNumber();
                                 paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
                             }
                         }
@@ -255,7 +255,7 @@ public class PaintController {
                                 model.getCurrentFigureOutlineColor(), model.getCurrentFigureBackgroundColor(), 
                                 model.getCurrentThickness());
                         paintView.getPaintingPanel().repaint();
-                        model.incrementDrawnFigures();
+                        model.incrementDrawnFiguresNumber();
                         paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
                     }
                     triangleXpoints = new ArrayList<>();

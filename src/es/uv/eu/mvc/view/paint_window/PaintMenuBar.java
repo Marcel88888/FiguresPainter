@@ -9,44 +9,48 @@ public class PaintMenuBar extends JMenuBar {
     
     private JMenu file;
     private JMenuItem save;
-    private JMenuItem authors;
     private JMenuItem exit;
-    private JMenu settings;
+    private JMenu edit;
     private JMenuItem changeDefaultValues;
     private JMenuItem setForDefaultValues;
+    private JMenu about;
+    private JMenuItem authors;
     
     public PaintMenuBar() {
         
         this.file = new JMenu("File");
         this.save = new JMenuItem("Save as");
-        this.authors = new JMenuItem("Authors");
         this.exit = new JMenuItem("Exit");
         
-        this.settings = new JMenu("Settings");
+        this.edit = new JMenu("Edit");
         this.changeDefaultValues = new JMenuItem("Change default values");
         this.setForDefaultValues = new JMenuItem("Set current values to default");
         
+        this.about = new JMenu("About");
+        this.authors = new JMenuItem("Authors");
+        
         save.setActionCommand("saveImage");
-        authors.setActionCommand("showAuthors");
         exit.setActionCommand("exit");
         changeDefaultValues.setActionCommand("changeDefaultValues");
         setForDefaultValues.setActionCommand("setCurrentValuesToDefault");
+        authors.setActionCommand("showAuthors");
         
         file.add(save);
-        file.add(authors);
         file.add(exit);
-        settings.add(changeDefaultValues);
-        settings.add(setForDefaultValues);
+        edit.add(changeDefaultValues);
+        edit.add(setForDefaultValues);
+        about.add(authors);
         
         this.add(file);
-        this.add(settings);
+        this.add(edit);
+        this.add(about);
     }
     
     public void setActionListener(ActionListener al) {
         save.addActionListener(al);
-        authors.addActionListener(al);
         exit.addActionListener(al);
         changeDefaultValues.addActionListener(al);
         setForDefaultValues.addActionListener(al);
+        authors.addActionListener(al);
     }  
 }
