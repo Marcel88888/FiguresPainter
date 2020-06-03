@@ -24,7 +24,6 @@ public class ToolsPanel extends JPanel {
     public ToolsPanel(PaintView paintView) {
         
         this.setLayout( new FlowLayout(FlowLayout.CENTER));
-        this.setBorder(BorderFactory.createLineBorder(Color.black));
         this.setPreferredSize(new Dimension(250, 84));
         this.setMinimumSize(this.getPreferredSize());
         this.setMaximumSize(this.getPreferredSize());

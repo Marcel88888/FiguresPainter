@@ -7,10 +7,8 @@ public class PaintingPanel extends JPanel {
     
     private PaintView paintView;
     
-    public PaintingPanel(PaintView paintView) {
-        
+    public PaintingPanel(PaintView paintView) {        
         this.paintView = paintView;
-        this.setBackground(paintView.getModel().getBackgroundColor());
     }
     
     @Override

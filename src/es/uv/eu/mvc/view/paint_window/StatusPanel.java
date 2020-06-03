@@ -32,7 +32,7 @@ public class StatusPanel extends JPanel {
         Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
         Border border = BorderFactory.createCompoundBorder(titledEmptyBorder, emptyBorder);
         this.setBorder(border);
-        this.paintView= paintView;
+        this.paintView = paintView;
         this.currentThicknessTextLabel = new JLabel("Thickness");
         this.currentThicknessValueLabel = new JLabel(String.valueOf(paintView.getModel().getCurrentThickness()), SwingConstants.RIGHT);
         this.currentOutlineColorTextLabel = new JLabel("Outline color");

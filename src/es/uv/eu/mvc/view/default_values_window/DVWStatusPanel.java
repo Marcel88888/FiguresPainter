@@ -39,9 +39,9 @@ public class DVWStatusPanel extends JPanel {
         this.defaultBackgroundColorLabel = new JLabel();
         
         defaultThicknessValueLabel.setPreferredSize(new Dimension(30, 20));
-        defaultThicknessValueLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         defaultThicknessValueLabel.setMinimumSize(defaultThicknessValueLabel.getPreferredSize());
         defaultThicknessValueLabel.setMaximumSize(defaultThicknessValueLabel.getPreferredSize());
+        defaultThicknessValueLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         
         Border etchedBorder = BorderFactory.createEtchedBorder(EtchedBorder.LOWERED);
         Border emptyBorder2 = BorderFactory.createEmptyBorder(0, 0, 0, 1);
