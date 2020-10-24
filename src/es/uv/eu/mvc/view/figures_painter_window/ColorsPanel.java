@@ -1,4 +1,4 @@
-package es.uv.eu.mvc.view.paint_window;
+package es.uv.eu.mvc.view.figures_painter_window;
 
 import java.awt.Color;
 import java.awt.Dimension;

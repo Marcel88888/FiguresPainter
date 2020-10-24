@@ -1,4 +1,4 @@
-package es.uv.eu.mvc.view.paint_window;
+package es.uv.eu.mvc.view.figures_painter_window;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -16,23 +16,23 @@ import javax.swing.event.ChangeListener;
 
 public class SettingsPanel extends JPanel {
     
-    private PaintView paintView;
+    private FiguresPainterView figuresPainterView;
     private ToolsPanel toolsPanel;
     private JSlider currentThicknessSlider;
     private ColorsPanel currentColorsPanel;
     
-    public SettingsPanel(PaintView paintView) {
+    public SettingsPanel(FiguresPainterView figuresPainterView) {
         
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-        this.paintView = paintView;
+        this.figuresPainterView = figuresPainterView;
         
-        this.toolsPanel = new ToolsPanel(paintView);
+        this.toolsPanel = new ToolsPanel(figuresPainterView);
         this.currentThicknessSlider = new JSlider(0, 100);
         this.currentColorsPanel = new ColorsPanel();
         
         currentThicknessSlider.setMajorTickSpacing(10);
         currentThicknessSlider.setMinorTickSpacing(1);
-        currentThicknessSlider.setValue(paintView.getModel().getCurrentThickness());
+        currentThicknessSlider.setValue(figuresPainterView.getModel().getCurrentThickness());
         currentThicknessSlider.setPaintTicks(true);
         currentThicknessSlider.setPaintLabels(true);
         currentThicknessSlider.setFont(new Font("Symbol", Font.PLAIN, 15)); 

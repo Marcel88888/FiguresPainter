@@ -1,7 +1,7 @@
 package es.uv.eu.mvc.view.default_values_window;
 
-import es.uv.eu.mvc.model.PaintModel;
-import es.uv.eu.mvc.view.paint_window.PaintView;
+import es.uv.eu.mvc.model.FiguresPainterModel;
+import es.uv.eu.mvc.view.figures_painter_window.FiguresPainterView;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -12,14 +12,14 @@ import javax.swing.event.ChangeListener;
 
 public class DVWView extends JDialog {
     
-    private PaintModel model;
+    private FiguresPainterModel model;
     private DVWColorsPanel colorsPanel;
     private DVWBottomPanel bottomPanel;
     private DVWMenuBar dVWMenuBar;
     
-    public DVWView(PaintModel model, PaintView paintView) {
+    public DVWView(FiguresPainterModel model, FiguresPainterView figuresPainterView) {
         
-        super(paintView);
+        super(figuresPainterView);
         this.setTitle("Default values window");
         this.setName("defaultValuesWindow");
         this.setLayout(new BorderLayout(17, 8));
@@ -40,7 +40,7 @@ public class DVWView extends JDialog {
         this.setVisible(true);
     }
 
-    public PaintModel getModel() {
+    public FiguresPainterModel getModel() {
         return model;
     }
     

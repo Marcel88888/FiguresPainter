@@ -1,6 +1,6 @@
-package es.uv.eu.mvc.view.paint_window;
+package es.uv.eu.mvc.view.figures_painter_window;
 
-import es.uv.eu.mvc.model.PaintModel;
+import es.uv.eu.mvc.model.FiguresPainterModel;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Toolkit;
@@ -11,24 +11,24 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.event.ChangeListener;
 
-public class PaintView extends JFrame {
+public class FiguresPainterView extends JFrame {
     
-    private PaintModel model;
+    private FiguresPainterModel model;
     private SettingsPanel settingsPanel;
     private PaintingPanel paintingPanel;
     private StatusPanel statusPanel;
-    private PaintMenuBar menu;
+    private FiguresPainterMenuBar menu;
     
-    public PaintView(PaintModel model) {
+    public FiguresPainterView(FiguresPainterModel model) {
         
-        super("Paint");
-        this.setName("paintWindow");
+        super("FiguresPainter");
+        this.setName("figuresPainterWindow");
         this.setLayout(new BorderLayout());
         this.model = model;
         this.settingsPanel = new SettingsPanel(this);
         this.paintingPanel = new PaintingPanel(this);
         this.statusPanel = new StatusPanel(this);
-        this.menu = new PaintMenuBar();
+        this.menu = new FiguresPainterMenuBar();
         
         this.add(settingsPanel, BorderLayout.NORTH);
         this.add(paintingPanel, BorderLayout.CENTER);
@@ -42,7 +42,7 @@ public class PaintView extends JFrame {
         this.setVisible(true);
     }
 
-    public PaintModel getModel() {
+    public FiguresPainterModel getModel() {
         return model;
     }
 

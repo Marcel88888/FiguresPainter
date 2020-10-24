@@ -1,4 +1,4 @@
-package es.uv.eu.mvc.view.paint_window;
+package es.uv.eu.mvc.view.figures_painter_window;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -15,13 +15,13 @@ import javax.swing.border.TitledBorder;
 
 public class ToolsPanel extends JPanel {
     
-    private PaintView paintView;
+    private FiguresPainterView figuresPainterView;
     private JButton rectangleButton;
     private JButton triangleButton;
     private JButton circleButton;
     private JButton eraserButton;
     
-    public ToolsPanel(PaintView paintView) {
+    public ToolsPanel(FiguresPainterView figuresPainterView) {
         
         this.setLayout( new FlowLayout(FlowLayout.CENTER));
         this.setPreferredSize(new Dimension(250, 84));
@@ -32,7 +32,7 @@ public class ToolsPanel extends JPanel {
         Border emptyBorder = BorderFactory.createEmptyBorder(10, 5, 5, 5);
         Border border = BorderFactory.createCompoundBorder(titledEtchedBorder, emptyBorder);
         this.setBorder(border);
-        this.paintView = paintView;
+        this.figuresPainterView = figuresPainterView;
         
         Image image;
         Image scaledImage;

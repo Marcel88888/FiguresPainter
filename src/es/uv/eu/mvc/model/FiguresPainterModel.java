@@ -9,7 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-public class PaintModel {
+public class FiguresPainterModel {
     
     private Color defaultFigureOutlineColor = Color.BLACK;
     private Color defaultFigureBackgroundColor = Color.BLACK;
@@ -17,7 +17,7 @@ public class PaintModel {
     private Color unconfirmedDefaultFigureOutlineColor;
     private Color unconfirmedDefaultFigureBackgroundColor;
     private int unconfirmedDefaultThickness;
-    private Color currentFigureOutlinecolor;
+    private Color currentFigureOutlineColor;
     private Color currentFigureBackgroundColor;
     private int currentThickness;
     private int drawnFiguresNumber = 0;
@@ -34,8 +34,8 @@ public class PaintModel {
         ERASER;
     }
     
-    public PaintModel() {
-        currentFigureOutlinecolor = defaultFigureOutlineColor;
+    public FiguresPainterModel() {
+        currentFigureOutlineColor = defaultFigureOutlineColor;
         currentFigureBackgroundColor = defaultFigureBackgroundColor;
         currentThickness = defaultThickness;
         unconfirmedDefaultFigureOutlineColor = defaultFigureOutlineColor;
@@ -75,8 +75,8 @@ public class PaintModel {
         this.unconfirmedDefaultThickness = unconfirmedDefaultThickness;
     }
 
-    public void setCurrentFigureOutlineColor(Color currentFigureOutlinecolor) {
-        this.currentFigureOutlinecolor = currentFigureOutlinecolor;
+    public void setCurrentFigureOutlineColor(Color currentFigureOutlineColor) {
+        this.currentFigureOutlineColor = currentFigureOutlineColor;
     }
 
     public void setCurrentFigureBackgroundColor(Color currentFigureBackgroundColor) {
@@ -116,7 +116,7 @@ public class PaintModel {
     }
 
     public Color getCurrentFigureOutlineColor() {
-        return currentFigureOutlinecolor;
+        return currentFigureOutlineColor;
     }
 
     public Color getCurrentFigureBackgroundColor() {
@@ -165,7 +165,7 @@ public class PaintModel {
     
     public void setCurrentToDefault() {
         currentThickness = defaultThickness;
-        currentFigureOutlinecolor = defaultFigureOutlineColor;
+        currentFigureOutlineColor = defaultFigureOutlineColor;
         currentFigureBackgroundColor = defaultFigureBackgroundColor;
     }
     

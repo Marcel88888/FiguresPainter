@@ -1,4 +1,4 @@
-package es.uv.eu.mvc.view.paint_window;
+package es.uv.eu.mvc.view.figures_painter_window;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -14,7 +14,7 @@ import javax.swing.border.TitledBorder;
 
 public class StatusPanel extends JPanel {
     
-    private PaintView paintView;
+    private FiguresPainterView figuresPainterView;
     private JLabel currentThicknessTextLabel;
     private JLabel currentThicknessValueLabel;
     private JLabel currentOutlineColorTextLabel;
@@ -24,7 +24,7 @@ public class StatusPanel extends JPanel {
     private JLabel drawnFiguresCounterTextLabel;
     private JLabel drawnFiguresCounterValueLabel;
     
-    public StatusPanel(PaintView paintView) {
+    public StatusPanel(FiguresPainterView figuresPainterView) {
     
         this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
         Border titledEmptyBorder = BorderFactory.createTitledBorder(BorderFactory.createEmptyBorder(), 
@@ -32,15 +32,15 @@ public class StatusPanel extends JPanel {
         Border emptyBorder = BorderFactory.createEmptyBorder(10, 10, 10, 10);
         Border border = BorderFactory.createCompoundBorder(titledEmptyBorder, emptyBorder);
         this.setBorder(border);
-        this.paintView = paintView;
+        this.figuresPainterView = figuresPainterView;
         this.currentThicknessTextLabel = new JLabel("Thickness");
-        this.currentThicknessValueLabel = new JLabel(String.valueOf(paintView.getModel().getCurrentThickness()), SwingConstants.RIGHT);
+        this.currentThicknessValueLabel = new JLabel(String.valueOf(figuresPainterView.getModel().getCurrentThickness()), SwingConstants.RIGHT);
         this.currentOutlineColorTextLabel = new JLabel("Outline color");
         this.currentOutlineColorLabel = new JLabel();
         this.currentBackgroundColorTextLabel = new JLabel("Background color");
         this.currentBackgroundColorLabel = new JLabel();
         this.drawnFiguresCounterTextLabel = new JLabel("Nº drawn figures");
-        this.drawnFiguresCounterValueLabel = new JLabel(String.valueOf(paintView.getModel().getDrawnFiguresNumber()), SwingConstants.RIGHT);
+        this.drawnFiguresCounterValueLabel = new JLabel(String.valueOf(figuresPainterView.getModel().getDrawnFiguresNumber()), SwingConstants.RIGHT);
         
         currentThicknessValueLabel.setPreferredSize(new Dimension(30, 20));
         currentThicknessValueLabel.setMinimumSize(currentThicknessValueLabel.getPreferredSize());
@@ -61,14 +61,14 @@ public class StatusPanel extends JPanel {
         currentOutlineColorLabel.setMinimumSize(currentOutlineColorLabel.getPreferredSize());
         currentOutlineColorLabel.setMaximumSize(currentOutlineColorLabel.getPreferredSize());
         currentOutlineColorLabel.setOpaque(true);
-        currentOutlineColorLabel.setBackground(paintView.getModel().getCurrentFigureOutlineColor());
+        currentOutlineColorLabel.setBackground(figuresPainterView.getModel().getCurrentFigureOutlineColor());
         
         currentBackgroundColorLabel.setPreferredSize(colorDimension);
         currentBackgroundColorLabel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
         currentBackgroundColorLabel.setMinimumSize(currentBackgroundColorLabel.getPreferredSize());
         currentBackgroundColorLabel.setMaximumSize(currentBackgroundColorLabel.getPreferredSize());
         currentBackgroundColorLabel.setOpaque(true);
-        currentBackgroundColorLabel.setBackground(paintView.getModel().getCurrentFigureBackgroundColor());
+        currentBackgroundColorLabel.setBackground(figuresPainterView.getModel().getCurrentFigureBackgroundColor());
         
         Dimension smallGap = new Dimension(10, 0);
         Dimension bigGap = new Dimension(200, 0);

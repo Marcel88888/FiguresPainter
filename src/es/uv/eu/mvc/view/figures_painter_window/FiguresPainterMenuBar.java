@@ -1,11 +1,11 @@
-package es.uv.eu.mvc.view.paint_window;
+package es.uv.eu.mvc.view.figures_painter_window;
 
 import java.awt.event.ActionListener;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class PaintMenuBar extends JMenuBar {
+public class FiguresPainterMenuBar extends JMenuBar {
     
     private JMenu file;
     private JMenuItem save;
@@ -16,7 +16,7 @@ public class PaintMenuBar extends JMenuBar {
     private JMenu about;
     private JMenuItem authors;
     
-    public PaintMenuBar() {
+    public FiguresPainterMenuBar() {
         
         this.file = new JMenu("File");
         this.save = new JMenuItem("Save as");

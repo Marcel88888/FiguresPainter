@@ -1,9 +1,9 @@
 package es.uv.eu.mvc.controller;
 
-import es.uv.eu.mvc.model.PaintModel;
+import es.uv.eu.mvc.model.FiguresPainterModel;
 import es.uv.eu.mvc.view.default_values_window.DVWView;
-import es.uv.eu.mvc.view.paint_window.PaintView;
-import es.uv.eu.mvc.view.paint_window.SaveImage;
+import es.uv.eu.mvc.view.figures_painter_window.FiguresPainterView;
+import es.uv.eu.mvc.view.figures_painter_window.SaveImage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -22,35 +22,35 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 
-public class PaintController {
+public class FiguresPainterController {
     
-    private PaintModel model;
+    private FiguresPainterModel model;
     private DVWView defValWindView;
-    private PaintView paintView;
+    private FiguresPainterView figuresPainterView;
     
-    public PaintController(PaintModel model, DVWView defValWindView, PaintView paintView) {
+    public FiguresPainterController(FiguresPainterModel model, DVWView defValWindView, FiguresPainterView figuresPainterView) {
         this.model = model;
         this.defValWindView = defValWindView;
-        this.paintView = paintView;
+        this.figuresPainterView = figuresPainterView;
         
-        PaintWindowListener paintWindowListener = new PaintWindowListener();
+        FiguresPainterWindowListener figuresPainterWindowListener = new FiguresPainterWindowListener();
         
-        defValWindView.addWindowListener(paintWindowListener);
-        paintView.addWindowListener(paintWindowListener);
+        defValWindView.addWindowListener(figuresPainterWindowListener);
+        figuresPainterView.addWindowListener(figuresPainterWindowListener);
         
-        PaintActionListener paintActionListener = new PaintActionListener();
-        PaintChangeListener paintChangeListener = new PaintChangeListener();
+        FiguresPainterActionListener figuresPainterActionListener = new FiguresPainterActionListener();
+        FiguresPainterChangeListener figuresPainterChangeListener = new FiguresPainterChangeListener();
         
-        defValWindView.setActionListener(paintActionListener);
-        defValWindView.setChangeListener(paintChangeListener);
+        defValWindView.setActionListener(figuresPainterActionListener);
+        defValWindView.setChangeListener(figuresPainterChangeListener);
         
-        paintView.setActionListener(paintActionListener);
-        paintView.setChangeListener(paintChangeListener);
-        paintView.setMouseListener(new PainterMouseListener());
-        paintView.setMouseMotionListener(new PaintMouseMotionListener());
+        figuresPainterView.setActionListener(figuresPainterActionListener);
+        figuresPainterView.setChangeListener(figuresPainterChangeListener);
+        figuresPainterView.setMouseListener(new FiguresPainterMouseListener());
+        figuresPainterView.setMouseMotionListener(new FiguresPainterMouseMotionListener());
     }
     
-    private class PaintActionListener implements ActionListener {
+    private class FiguresPainterActionListener implements ActionListener {
         
         @Override
         public void actionPerformed(ActionEvent ae) {
@@ -60,32 +60,32 @@ public class PaintController {
                 button = (JButton) ae.getSource();
                 switch (command) {
                     case "setDrawingRectanglesMode":
-                        model.setDrawingMode(PaintModel.DrawingMode.DRAWING_RECTANGLES);
-                        paintView.displayToolsPanelButtonAsChosen(button);
-                        paintView.displayOtherToolsPanelButtonsAsUnchosen(button);
+                        model.setDrawingMode(FiguresPainterModel.DrawingMode.DRAWING_RECTANGLES);
+                        figuresPainterView.displayToolsPanelButtonAsChosen(button);
+                        figuresPainterView.displayOtherToolsPanelButtonsAsUnchosen(button);
                         break;
                     case "setDrawingTrianglesMode":
-                        model.setDrawingMode(PaintModel.DrawingMode.DRAWING_TRIANGLES);
-                        paintView.displayToolsPanelButtonAsChosen(button);
-                        paintView.displayOtherToolsPanelButtonsAsUnchosen(button);
+                        model.setDrawingMode(FiguresPainterModel.DrawingMode.DRAWING_TRIANGLES);
+                        figuresPainterView.displayToolsPanelButtonAsChosen(button);
+                        figuresPainterView.displayOtherToolsPanelButtonsAsUnchosen(button);
                         break;
                     case "setDrawingCirclesMode":
-                        model.setDrawingMode(PaintModel.DrawingMode.DRAWING_CIRCLES);
-                        paintView.displayToolsPanelButtonAsChosen(button);
-                        paintView.displayOtherToolsPanelButtonsAsUnchosen(button);
+                        model.setDrawingMode(FiguresPainterModel.DrawingMode.DRAWING_CIRCLES);
+                        figuresPainterView.displayToolsPanelButtonAsChosen(button);
+                        figuresPainterView.displayOtherToolsPanelButtonsAsUnchosen(button);
                         break;
                     case "setEraserMode":
-                        model.setDrawingMode(PaintModel.DrawingMode.ERASER);
-                        paintView.displayToolsPanelButtonAsChosen(button);
-                        paintView.displayOtherToolsPanelButtonsAsUnchosen(button);
+                        model.setDrawingMode(FiguresPainterModel.DrawingMode.ERASER);
+                        figuresPainterView.displayToolsPanelButtonAsChosen(button);
+                        figuresPainterView.displayOtherToolsPanelButtonsAsUnchosen(button);
                         break;
                     case "changeCurrentOutlineColor":
-                        model.setCurrentFigureOutlineColor(paintView.getCurrentOutlineColorByButton(button));
-                        paintView.updateCurrentOutlineColorLabel(model.getCurrentFigureOutlineColor());
+                        model.setCurrentFigureOutlineColor(figuresPainterView.getCurrentOutlineColorByButton(button));
+                        figuresPainterView.updateCurrentOutlineColorLabel(model.getCurrentFigureOutlineColor());
                         break;
                     case "changeCurrentBackgroundColor":
-                        model.setCurrentFigureBackgroundColor(paintView.getCurrentBackgroundColorByButton(button));
-                        paintView.updateCurrentBackgroundColorLabel(model.getCurrentFigureBackgroundColor());
+                        model.setCurrentFigureBackgroundColor(figuresPainterView.getCurrentBackgroundColorByButton(button));
+                        figuresPainterView.updateCurrentBackgroundColorLabel(model.getCurrentFigureBackgroundColor());
                         break;
                     case "changeDefaultOutlineColor":
                         model.setUnconfirmedDefaultFigureOutlineColor(defValWindView.getDefaultOutlineColorByButton(button));
@@ -99,7 +99,7 @@ public class PaintController {
                         model.confirmDefaultValues();
                         model.clearUnconfirmedValues();
                         defValWindView.dispatchEvent(new WindowEvent(defValWindView, WindowEvent.WINDOW_CLOSING));
-                        paintView.setEnabled(true);
+                        figuresPainterView.setEnabled(true);
                         break;
                     default:
                         System.out.println("Controller: Command " + command + 
@@ -110,32 +110,32 @@ public class PaintController {
             else {
                 switch(command) {
                     case "changeDefaultValues":
-                        defValWindView = new DVWView(model, paintView);        
-                        defValWindView.addWindowListener(new PaintWindowListener());
-                        defValWindView.setActionListener(new PaintActionListener());
-                        defValWindView.setChangeListener(new PaintChangeListener());
-                        paintView.setEnabled(false);
+                        defValWindView = new DVWView(model, figuresPainterView);        
+                        defValWindView.addWindowListener(new FiguresPainterWindowListener());
+                        defValWindView.setActionListener(new FiguresPainterActionListener());
+                        defValWindView.setChangeListener(new FiguresPainterChangeListener());
+                        figuresPainterView.setEnabled(false);
                         break;
                     case "setCurrentValuesToDefault":
                         model.setCurrentToDefault();
-                        paintView.updateChosenValuesToDefault(model.getCurrentThickness(),
+                        figuresPainterView.updateChosenValuesToDefault(model.getCurrentThickness(),
                                 model.getCurrentFigureOutlineColor(), model.getCurrentFigureBackgroundColor());
                         break;
                     case "saveImage":
                         SaveImage imageSaver = new SaveImage();
-                        model.saveImage(imageSaver.getFile(paintView));
+                        model.saveImage(imageSaver.getFile(figuresPainterView));
                         break;
                     case "exit":
                         System.exit(0);
                         break;
                     case "showAuthors":
-                        JOptionPane.showMessageDialog(paintView, "Authors: Marcel Kawski", "Authors", 
+                        JOptionPane.showMessageDialog(figuresPainterView, "Authors: Marcel Kawski", "Authors", 
                                 JOptionPane.PLAIN_MESSAGE);
                         break;
                     case "exitDVW":
                         model.clearUnconfirmedValues();
                         defValWindView.dispatchEvent(new WindowEvent(defValWindView, WindowEvent.WINDOW_CLOSING));
-                        paintView.setEnabled(true);
+                        figuresPainterView.setEnabled(true);
                         break;
                     default:
                         System.out.println("Controller: Command " + command + 
@@ -146,7 +146,7 @@ public class PaintController {
         }
     }
     
-    private class PaintChangeListener implements ChangeListener {
+    private class FiguresPainterChangeListener implements ChangeListener {
         @Override
         public void stateChanged(ChangeEvent ce) {
             JSlider slider = (JSlider)ce.getSource();
@@ -155,7 +155,7 @@ public class PaintController {
             switch(sliderName) {
                 case "currentThicknessSlider":
                     model.setCurrentThickness(newThickness);
-                    paintView.updateCurrentThicknessValueLabel(model.getCurrentThickness());
+                    figuresPainterView.updateCurrentThicknessValueLabel(model.getCurrentThickness());
                     break;
                 case "defaultThicknessSlider":
                     model.setUnconfirmedDefaultThickness(newThickness);
@@ -169,13 +169,13 @@ public class PaintController {
         }
     }
     
-    private class PainterMouseListener extends MouseAdapter {
+    private class FiguresPainterMouseListener extends MouseAdapter {
         
         private int rectangleStartingX, rectangleStartingY;
         private int circleStartingX, circleStartingY;
         private ArrayList<Integer> triangleXpoints = new ArrayList<>();
         private ArrayList<Integer> triangleYpoints = new ArrayList<>();
-        private PaintModel.DrawingMode mode;
+        private FiguresPainterModel.DrawingMode mode;
 
         @Override
         public void mousePressed(MouseEvent me) {
@@ -210,9 +210,9 @@ public class PaintController {
                                 model.drawRectangle(rectangleStartingX, rectangleStartingY, mouseX, mouseY, 
                                     model.getCurrentFigureOutlineColor(), model.getCurrentFigureBackgroundColor(), 
                                     model.getCurrentThickness());
-                                paintView.getPaintingPanel().repaint();
+                                figuresPainterView.getPaintingPanel().repaint();
                                 model.incrementDrawnFiguresNumber();
-                                paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
+                                figuresPainterView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
                             }
                         }
                         break;
@@ -224,9 +224,9 @@ public class PaintController {
                             if (r > currentThickness) {
                                 model.drawCircle(circleStartingX, circleStartingY, radius, model.getCurrentFigureOutlineColor(), 
                                         model.getCurrentFigureBackgroundColor(), model.getCurrentThickness());
-                                paintView.getPaintingPanel().repaint();
+                                figuresPainterView.getPaintingPanel().repaint();
                                 model.incrementDrawnFiguresNumber();
-                                paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
+                                figuresPainterView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
                             }
                         }
                         break;
@@ -237,7 +237,7 @@ public class PaintController {
         @Override
         public void mouseClicked(MouseEvent me) {
             mode = model.getDrawingMode();
-            if (mode == PaintModel.DrawingMode.DRAWING_TRIANGLES && me.getButton() == MouseEvent.BUTTON1) {
+            if (mode == FiguresPainterModel.DrawingMode.DRAWING_TRIANGLES && me.getButton() == MouseEvent.BUTTON1) {
                 if (triangleXpoints.size() < 3) {
                     triangleXpoints.add(me.getX());
                     triangleYpoints.add(me.getY());
@@ -254,41 +254,41 @@ public class PaintController {
                         model.drawTriangle(x0, y0, x1, y1, x2, y2, 
                                 model.getCurrentFigureOutlineColor(), model.getCurrentFigureBackgroundColor(), 
                                 model.getCurrentThickness());
-                        paintView.getPaintingPanel().repaint();
+                        figuresPainterView.getPaintingPanel().repaint();
                         model.incrementDrawnFiguresNumber();
-                        paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
+                        figuresPainterView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
                     }
                     triangleXpoints = new ArrayList<>();
                     triangleYpoints = new ArrayList<>();
                 }
             }
             else if(me.getButton() == MouseEvent.BUTTON3) {
-                int confirm = JOptionPane.showConfirmDialog(paintView, "Do you want to delete all the drawn figures?", "Select the option", 
+                int confirm = JOptionPane.showConfirmDialog(figuresPainterView, "Do you want to delete all the drawn figures?", "Select the option", 
                     JOptionPane.YES_NO_OPTION);
                 if(confirm == 0) {
                     model.clearImage();
-                    paintView.getPaintingPanel().repaint();
-                    paintView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
+                    figuresPainterView.getPaintingPanel().repaint();
+                    figuresPainterView.updateDrawnFiguresCounterValueLabel(model.getDrawnFiguresNumber());
                 }
             }
         }
     }
     
-    private class PaintMouseMotionListener extends MouseMotionAdapter {
+    private class FiguresPainterMouseMotionListener extends MouseMotionAdapter {
         
-        private PaintModel.DrawingMode mode;
+        private FiguresPainterModel.DrawingMode mode;
         
         @Override
         public void mouseDragged(MouseEvent me) {
             mode = model.getDrawingMode();
-            if(mode == PaintModel.DrawingMode.ERASER && SwingUtilities.isLeftMouseButton(me)) { 
+            if(mode == FiguresPainterModel.DrawingMode.ERASER && SwingUtilities.isLeftMouseButton(me)) { 
                 model.erase(me.getX(), me.getY(), model.getEraserSize()/2, model.getBackgroundColor());
-                paintView.getPaintingPanel().repaint();
+                figuresPainterView.getPaintingPanel().repaint();
             }
         } 
     }
     
-    private class PaintWindowListener extends WindowAdapter {
+    private class FiguresPainterWindowListener extends WindowAdapter {
         @Override
         public void windowClosing(WindowEvent e) {
             JFrame closedJFrame;
@@ -304,14 +304,14 @@ public class PaintController {
             }
             if(closedWindowName != null) {
                 switch(closedWindowName) {
-                    case "paintWindow":
+                    case "figuresPainterWindow":
                         System.exit(0);
                         break;
                     case "defaultValuesWindow":
                         if(closedJDialog != null) {
                             model.clearUnconfirmedValues();
                             closedJDialog.dispose();
-                            paintView.setEnabled(true);
+                            figuresPainterView.setEnabled(true);
                         }
                         break;   
                 }
