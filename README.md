@@ -34,14 +34,14 @@ Final project for the subject Human Computer Interaction on the Universitat de V
 * displaying the author of the project
 
 ## Instruction
-* **Drawing rectangles**
-To draw a rectangle you need to click the mouse on the spot you want to start your rectangle and drag it to the spot you want your rectangle to end (the beginning and end of the rectangle are opposite vertices of the rectangle).
+**Drawing rectangles**
+   To draw a rectangle you need to click the mouse on the spot you want to start your rectangle and drag it to the spot you want your rectangle to end (the beginning and end of the rectangle are opposite vertices of the rectangle).
 
-* **Drawing triangles**
-To draw a triangle you need to click the mouse thrice in spots you want 3 vertices of your traingle to be located.
+**Drawing triangles**
+   To draw a triangle you need to click the mouse thrice in spots you want 3 vertices of your traingle to be located.
 
-* **Drawing circles**
-To draw a circle you need to click the mouse in the spot you want to have the centre of your circle and drag it to the spot you want your circle to end (by dragging the mouse you adjust the radius of the circle).
+**Drawing circles**
+   To draw a circle you need to click the mouse in the spot you want to have the centre of your circle and drag it to the spot you want your circle to end (by dragging the mouse you adjust the radius of the circle).
 
 
 
